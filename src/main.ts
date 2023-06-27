@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 
-const port = 3001;
+const port = 3090;
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {logger:['error', 'warn']});

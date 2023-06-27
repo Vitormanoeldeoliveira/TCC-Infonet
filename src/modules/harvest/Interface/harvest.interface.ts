@@ -5,7 +5,10 @@ export class IHarvest {
   @Field(() => ID)
   id: number;
   @Field()
-  periodo: string;
+  tipo: string;
+  @Field()
+  data_safra: Date;
+
   @Field(() => Int)
   id_plantacao: number;
 }

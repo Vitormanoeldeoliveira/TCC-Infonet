@@ -7,9 +7,11 @@ import { DatabaseModule } from './database/database.module';
 import { ConfigModule } from '@nestjs/config';
 import { PlantationModule } from './modules/plantation/plantation.module';
 import { StateModule } from './modules/State/State.module';
-import { ProductModule } from './modules/product/product.module';
 import { HarvestModule } from './modules/harvest/harvest.module';
 import { CityModule } from './modules/city/city.module';
+import { PlantModule } from './modules/plant/plant.module';
+import { HarvestExpenseModule } from './modules/harvest-expense/harvest-expense.module';
+import { ProfitModule } from './modules/profit/profit.module';
 
 @Module({
   imports: [
@@ -22,11 +24,13 @@ import { CityModule } from './modules/city/city.module';
     UserModule,
     PlantationModule,
     StateModule,
-    ProductModule,
     HarvestModule,
     CityModule,
+    PlantModule,
+    HarvestExpenseModule,
     DatabaseModule,
     ConfigModule.forRoot({envFilePath: '.env'}),
+    ProfitModule,
   ],
   controllers: [],
   providers: [],

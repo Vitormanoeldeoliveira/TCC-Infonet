@@ -5,7 +5,14 @@ export class PlantationCreateInput {
   @Field()
   produto: string;
   @Field()
-  area: string;
+  area: number;
   @Field()
   tipo: string;
+
+  @Field()
+  id_usuario: number;
+  @Field()
+  id_cidade: number;
+  @Field()
+  id_planta: number;
 }

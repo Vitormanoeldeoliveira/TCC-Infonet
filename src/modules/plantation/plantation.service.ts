@@ -11,14 +11,19 @@ export class PlantationService {
     private plantation: Repository<PlantationEntity>
   ) {}
 
-  async getAll() : Promise<PlantationEntity[]> {
-    const plantations = await this.plantation.find();
+  async getAll()  {
+    const plantations = await this.plantation.find({ 
+      relations:{ usuario: true, cidade: {estado: true}, planta: true },       
+    });
     
     return plantations;
   }
 
   async getOne(id: number) {
-    const plantation = await this.plantation.findOne({ where: {id,}, });
+    const plantation = await this.plantation.findOne({ 
+      where: {id,},
+      relations:{ usuario: true, cidade: {estado: true}, planta: true },
+    });
     
     return plantation;
   }

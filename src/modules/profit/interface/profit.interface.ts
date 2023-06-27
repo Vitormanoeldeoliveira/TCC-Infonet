@@ -1,20 +1,18 @@
 import { Field, ID, InterfaceType } from "@nestjs/graphql";
 
 @InterfaceType()
-export class IPlantation {
+export class IProfit {
   @Field(() => ID)
   id: number;
   @Field()
-  produto: string;
+  qtd_venda: number;
   @Field()
-  area: number;
+  valor_venda: number;
   @Field()
-  tipo: string;
+  periodo_venda: Date;
 
   @Field()
-  id_usuario: number;
+  id_gasto: number;
   @Field()
-  id_cidade: number;
-  @Field()
-  id_planta: number;
+  id_safra: number;
 }
