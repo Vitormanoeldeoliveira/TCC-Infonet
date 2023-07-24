@@ -1,8 +1,9 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { PlantEntity } from './Entities/plant.entity';
-import { Repository } from 'typeorm';
+import { ILike, Repository } from 'typeorm';
 import { PlantCreateInput } from './dtos/plant-create.input';
 import { PlantUpdateInput } from './dtos/plant-update.input';
+import { PlantFilterInput } from './dtos/plant-filter.input';
 
 @Injectable()
 export class PlantService {
@@ -11,8 +12,18 @@ export class PlantService {
     private plant: Repository<PlantEntity>
   ) {}
 
-  async getAll() : Promise<PlantEntity[]> {
-    const plant = await this.plant.find();
+  async getAll(
+    filters: PlantFilterInput
+  ) {
+    const plant = await this.plant.find({
+      relations: {
+        usuario: true
+      },
+      where: {
+        ...filters.id_usuario && { id_usuario: filters.id_usuario },
+        ...filters.descricao && { descricao:  ILike(`%${filters.descricao}%`) }
+      }
+    });
 
     return plant;
   };

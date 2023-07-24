@@ -3,6 +3,7 @@ import { Repository } from 'typeorm';
 import { HarvestExpenseEntity } from './Entities/harvestExpense.entity';
 import { HarvestExpenseCreateInput } from './dtos/harvestExpense-create.input';
 import { HarvestExpenseUpdateInput } from './dtos/harvestExpense-update.input';
+import { HarvestExpenseFilterInput } from './dtos/harvestExpense-filter.input';
 
 @Injectable()
 export class HarvestExpenseService {
@@ -11,8 +12,17 @@ export class HarvestExpenseService {
     private harvestExpense: Repository<HarvestExpenseEntity>
   ) {}
 
-  async getAll() : Promise<HarvestExpenseEntity[]> {
-    const harvestExpense = await this.harvestExpense.find({ relations: {custoSafra: {plantacao: true}} });
+  async getAll(
+    filters: HarvestExpenseFilterInput
+  ) : Promise<HarvestExpenseEntity[]> {
+    const harvestExpense = await this.harvestExpense.find({ 
+      relations: {
+        custoSafra: {plantacao: true}
+      },
+      where: {
+        ...filters.id_safra && { id_safra: filters.id_safra }
+      }
+    });
 
     return harvestExpense;
   };

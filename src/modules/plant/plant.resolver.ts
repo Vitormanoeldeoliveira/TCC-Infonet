@@ -3,14 +3,18 @@ import { PlantService } from './plant.service';
 import { Plant } from './dtos/plant.model';
 import { PlantCreateInput } from './dtos/plant-create.input';
 import { PlantUpdateInput } from './dtos/plant-update.input';
+import { PlantFilterInput } from './dtos/plant-filter.input';
 
 @Resolver()
 export class PlantResolver {
   constructor(private service : PlantService ) {}
 
   @Query(() => [Plant])
-  async getAllPlant() : Promise<Plant[]> {
-    return await this.service.getAll()
+  async getAllPlant(
+    @Args('filters')
+    filters: PlantFilterInput
+  ) : Promise<Plant[]> {
+    return await this.service.getAll(filters)
   }
 
   @Query(() => Plant)

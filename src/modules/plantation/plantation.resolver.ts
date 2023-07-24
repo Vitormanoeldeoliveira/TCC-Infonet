@@ -3,14 +3,18 @@ import { PlantationService } from './plantation.service';
 import { Plantation } from './dtos/plantation.model';
 import { PlantationCreateInput } from './dtos/plantation-create.input';
 import { PlantationUpdateInput } from './dtos/plantation-update.input';
+import { PlantationFilterInput } from './dtos/plantation-filter.input';
 
 @Resolver()
 export class PlantationResolver {
   constructor(private service : PlantationService ) {}
 
   @Query(() => [Plantation])
-  async getAllPlantations() : Promise<Plantation[]> {
-    return await this.service.getAll()
+  async getAllPlantations(
+    @Args('filters')
+    filters: PlantationFilterInput
+  ) : Promise<Plantation[]> {
+    return await this.service.getAll(filters)
   }
 
   @Query(() => Plantation) 

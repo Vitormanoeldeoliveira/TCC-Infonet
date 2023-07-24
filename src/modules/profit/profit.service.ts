@@ -3,6 +3,7 @@ import { Repository } from 'typeorm';
 import { ProfitEntity } from './Entities/profit.entity';
 import { ProfitCreateInput } from './dtos/profit-create.input';
 import { ProfitUpdateInput } from './dtos/profit-update.input';
+import { ProfitFilterInput } from './dtos/profit-filter.input';
 
 @Injectable()
 export class ProfitService {
@@ -11,12 +12,17 @@ export class ProfitService {
     private profit: Repository<ProfitEntity>
   ) {}
 
-  async getAll() : Promise<ProfitEntity[]> {
+  async getAll(
+    filters: ProfitFilterInput
+  ) : Promise<ProfitEntity[]> {
     const profit = await this.profit.find({ 
       relations: {
         lucroSafra: true,
         lucroGasto: true,
-      } 
+      },
+      where: {
+        ...filters.id_safra && { id_safra: filters.id_safra }
+      }
     });
 
     return profit;
@@ -33,7 +39,6 @@ export class ProfitService {
   };
 
   async create(data: ProfitCreateInput) : Promise<ProfitEntity> {
-    console.log(data);
     
     const profit: any = {
       ...data

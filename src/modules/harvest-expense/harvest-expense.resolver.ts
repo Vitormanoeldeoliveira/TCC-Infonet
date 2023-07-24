@@ -3,14 +3,18 @@ import { HarvestExpenseService } from './harvest-expense.service';
 import { HarvestExpense } from './dtos/harvestExpense.model';
 import { HarvestExpenseCreateInput } from './dtos/harvestExpense-create.input';
 import { HarvestExpenseUpdateInput } from './dtos/harvestExpense-update.input';
+import { HarvestExpenseFilterInput } from './dtos/harvestExpense-filter.input';
 
 @Resolver()
 export class HarvestExpenseResolver {
   constructor(private service : HarvestExpenseService ) {}
 
   @Query(() => [HarvestExpense])
-  async getAllHarvestExpense() : Promise<HarvestExpense[]> {
-    return await this.service.getAll();
+  async getAllHarvestExpense(
+    @Args('filters')
+    filters: HarvestExpenseFilterInput
+  ) : Promise<HarvestExpense[]> {
+    return await this.service.getAll(filters);
   }
 
   @Query(() => HarvestExpense)

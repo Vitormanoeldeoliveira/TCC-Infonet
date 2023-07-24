@@ -3,6 +3,8 @@ import { InputType, Field } from '@nestjs/graphql';
 @InputType()
 export class PlantCreateInput {
   @Field()
+  descricao: string;
+  @Field()
   area: number;
   @Field()
   nome: string;
@@ -14,4 +16,7 @@ export class PlantCreateInput {
   qtd_adubo: number;
   @Field()
   qtd_insumos: number;
+
+  @Field()
+  id_usuario: number;
 }

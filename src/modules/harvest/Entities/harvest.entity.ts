@@ -12,6 +12,8 @@ export class HarvestEntity implements IHarvest {
   @PrimaryGeneratedColumn()
   id: number;
   @Column()
+  descricao: string;
+  @Column()
   tipo: string;
   @Column()
   data_safra: Date;

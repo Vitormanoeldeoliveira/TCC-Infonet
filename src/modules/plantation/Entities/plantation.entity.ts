@@ -10,6 +10,8 @@ export class PlantationEntity implements IPlantation {
   @PrimaryGeneratedColumn()
   id: number;
   @Column()
+  descricao: string;
+  @Column()
   area: number;
   @Column()
   tipo: string;

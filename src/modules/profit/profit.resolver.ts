@@ -3,14 +3,18 @@ import { ProfitService } from './profit.service';
 import { Profit } from './dtos/profit.model';
 import { ProfitCreateInput } from './dtos/profit-create.input';
 import { ProfitUpdateInput } from './dtos/profit-update.input';
+import { ProfitFilterInput } from './dtos/profit-filter.input';
 
 @Resolver()
 export class ProfitResolver {
   constructor(private service : ProfitService ) {}
 
   @Query(() => [Profit])
-  async getAllProfit() : Promise<Profit[]> {
-    return await this.service.getAll();
+  async getAllProfit(
+    @Args('filters')
+    filters: ProfitFilterInput
+  ) : Promise<Profit[]> {
+    return await this.service.getAll(filters);
   }
 
   @Query(() => Profit)
