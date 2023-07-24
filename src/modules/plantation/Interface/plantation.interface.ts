@@ -5,6 +5,8 @@ export class IPlantation {
   @Field(() => ID)
   id: number;
   @Field()
+  descricao: string;
+  @Field()
   produto: string;
   @Field()
   area: number;
