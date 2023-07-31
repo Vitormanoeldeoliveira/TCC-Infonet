@@ -3,6 +3,8 @@ import { InputType, Field } from '@nestjs/graphql';
 @InputType()
 export class PlantationUpdateInput {
   @Field()
+  descricao: string;
+  @Field()
   produto: string;
   @Field()
   area: number;

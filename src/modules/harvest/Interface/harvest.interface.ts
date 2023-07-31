@@ -5,6 +5,8 @@ export class IHarvest {
   @Field(() => ID)
   id: number;
   @Field()
+  descricao: string;
+  @Field()
   tipo: string;
   @Field()
   data_safra: Date;

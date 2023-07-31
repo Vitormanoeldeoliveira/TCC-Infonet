@@ -3,4 +3,3 @@ import { IUser } from '../Interface/user.interface';
 
 @ObjectType({ implements: IUser })
 export class User extends IUser {}
-

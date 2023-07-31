@@ -5,6 +5,8 @@ export class IPlant {
   @Field(() => ID)
   id: number;
   @Field()
+  descricao: string;
+  @Field()
   area: number;
   @Field()
   nome: string;
@@ -16,4 +18,7 @@ export class IPlant {
   qtd_adubo: number;
   @Field()
   qtd_insumos: number;
+
+  @Field()
+  id_usuario: number;
 }

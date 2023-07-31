@@ -12,6 +12,9 @@ import { CityModule } from './modules/city/city.module';
 import { PlantModule } from './modules/plant/plant.module';
 import { HarvestExpenseModule } from './modules/harvest-expense/harvest-expense.module';
 import { ProfitModule } from './modules/profit/profit.module';
+import { JwtModule } from '@nestjs/jwt';
+import { EmailvalidateService } from './modules/user/complements/emailValidate/emailvalidate.service';
+import { EmailvalidateModule } from './modules/user/complements/emailValidate/emailvalidate.module';
 
 @Module({
   imports: [
@@ -19,7 +22,7 @@ import { ProfitModule } from './modules/profit/profit.module';
       driver: ApolloDriver,
       autoSchemaFile: true,
       playground: false,
-      plugins: [ApolloServerPluginLandingPageLocalDefault()]
+      plugins: [ApolloServerPluginLandingPageLocalDefault()],
     }),
     UserModule,
     PlantationModule,
@@ -31,8 +34,12 @@ import { ProfitModule } from './modules/profit/profit.module';
     DatabaseModule,
     ConfigModule.forRoot({envFilePath: '.env'}),
     ProfitModule,
+    EmailvalidateModule,
+    JwtModule.register({
+      secret: 'secret',
+      signOptions: { expiresIn: '10s' }
+    }),
   ],
   controllers: [],
-  providers: [],
 })
 export class AppModule {}

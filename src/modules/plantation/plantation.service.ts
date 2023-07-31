@@ -1,8 +1,9 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { PlantationEntity } from './Entities/plantation.entity';
-import { Repository } from 'typeorm';
+import { ILike, Repository } from 'typeorm';
 import { PlantationCreateInput } from './dtos/plantation-create.input';
 import { PlantationUpdateInput } from './dtos/plantation-update.input';
+import { PlantationFilterInput } from './dtos/plantation-filter.input';
 
 @Injectable()
 export class PlantationService {
@@ -11,9 +12,19 @@ export class PlantationService {
     private plantation: Repository<PlantationEntity>
   ) {}
 
-  async getAll()  {
+  async getAll(
+    filters: PlantationFilterInput,
+  )  {
     const plantations = await this.plantation.find({ 
-      relations:{ usuario: true, cidade: {estado: true}, planta: true },       
+      relations:{ 
+        usuario: true, 
+        cidade: {estado: true}, 
+        planta: true 
+      },
+      where: {
+        ...filters.id_usuario && { id_usuario: filters.id_usuario },
+        ...filters.descricao && { descricao:  ILike(`%${filters.descricao}%`) }
+      }
     });
     
     return plantations;

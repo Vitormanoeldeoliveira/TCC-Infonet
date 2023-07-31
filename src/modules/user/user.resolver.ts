@@ -3,10 +3,18 @@ import { UserService } from './user.service';
 import { User } from './dtos/user.model';
 import { UserCreateInput } from './dtos/user-create.input';
 import { UserUpdateInput } from './dtos/user-update.input';
+import { UserFilterInput } from './dtos/user-filter.input';
+
+import { JwtService } from '@nestjs/jwt/dist';
+import { Token } from './complements/token/model/token.model';
+import { UserValidateEmailInput } from './complements/emailValidate/dtos/email-validate.input';
 
 @Resolver()
 export class UserResolver {
-  constructor(private service : UserService ) {}
+  constructor(
+    private service : UserService,
+    private JWTService: JwtService
+  ) {}
 
   @Query(() => [User])
   async getAllUsers() : Promise<User[]> {
@@ -44,4 +52,32 @@ export class UserResolver {
   ) {
     return await this.service.delete(id)
   }
+
+  @Query(() => Token)
+  async login(
+    @Args('filters')
+    filters: UserFilterInput
+  ) {
+    const user = await this.service.login(filters)
+
+    if(user){
+      const newToken = await this.JWTService.signAsync({id: user.id});
+
+      const tokens = {
+        token: newToken
+      }
+      
+      return tokens;
+    }
+    
+    return null
+  };
+
+  // @Mutation(() => User)
+  // async SendEmailValidate(
+  //   @Args('filters')
+  //   filters: UserValidateEmailInput
+  // ) {
+  //   return this.service.validate(filters)
+  // }
 }

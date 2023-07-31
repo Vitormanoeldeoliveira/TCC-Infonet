@@ -4,4 +4,6 @@ import { InputType, Field } from '@nestjs/graphql';
 export class StateCreateInput {
   @Field()
   uf: string;
+  @Field()
+  id_usuario: number;
 }

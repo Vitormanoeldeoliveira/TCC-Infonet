@@ -1,8 +1,9 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { HarvestEntity } from './Entities/harvest.entity';
-import { Repository } from 'typeorm';
+import { ILike, Repository } from 'typeorm';
 import { HarvestCreateInput } from './dtos/harvest-create.input';
 import { HarvestUpdateInput } from './dtos/harvest-update.input';
+import { HarvestFilterInput } from './dtos/harvest-filter.input';
 
 @Injectable()
 export class HarvestService {
@@ -11,14 +12,33 @@ export class HarvestService {
     private readonly harvest: Repository<HarvestEntity>
   ) {}
 
-  async getAll() : Promise<HarvestEntity[]> {
-    const harvests = await this.harvest.find({ relations:{ plantacao: true } });
+  async getAll(
+    filters: HarvestFilterInput
+  ) : Promise<HarvestEntity[]> {
+    const harvests = await this.harvest.find({
+      relations:{ 
+        plantacao: true 
+      },
+      where: {
+        ...filters.id_plantacao && { id_plantacao: filters.id_plantacao },
+        ...filters.descricao && { descricao:  ILike(`%${filters.descricao}%`) }
+      } 
+    });
 
     return harvests;
   }
 
-  async getOne(id: number) : Promise<HarvestEntity> {
-    const harvest = await this.harvest.findOne({ relations:{ plantacao:true }, where: {id}, })
+  async getOne(
+    id: number,
+    // filters: HarvestFilterInput
+  ) : Promise<HarvestEntity> {
+    const harvest = await this.harvest.findOne({ 
+      relations:{ plantacao:true }, 
+      where: {
+        id,
+        // ...filters.id_plantacao && { id_plantacao: filters.id_plantacao }
+      }, 
+    })
 
     return harvest
   }

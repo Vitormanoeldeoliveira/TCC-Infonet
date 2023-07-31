@@ -3,21 +3,30 @@ import { HarvestService } from './harvest.service';
 import { Harvest } from './dtos/harvest.model';
 import { HarvestCreateInput } from './dtos/harvest-create.input';
 import { HarvestUpdateInput } from './dtos/harvest-update.input';
+import { HarvestFilterInput } from './dtos/harvest-filter.input';
 
 @Resolver()
 export class HarvestResolver {
   constructor(private service: HarvestService) {}
 
   @Query(() => [Harvest])
-  async getAllHarvests() : Promise<Harvest[]> {
-    return await this.service.getAll()
+  async getAllHarvests(
+    @Args('filters')
+    filters: HarvestFilterInput
+  ) : Promise<Harvest[]> {
+    return await this.service.getAll(filters)
   };
 
   @Query(() => Harvest)
   async getOneHarvest(
-    @Args('id') id: number
+    @Args('id') id: number,
+    // @Args('filters')
+    // filters: HarvestFilterInput
   ) : Promise<Harvest> {
-    return await this.service.getOne(id)
+    return await this.service.getOne(
+      id, 
+      // filters
+    )
   }
 
   @Mutation(() => Harvest)
