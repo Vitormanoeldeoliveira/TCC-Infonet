@@ -4,4 +4,6 @@ import { InputType, Field } from '@nestjs/graphql';
 export class StateUpdateInput {
   @Field()
   uf: string
+  @Field()
+  id_usuario: number
 }
