@@ -25,7 +25,7 @@ export class UserService {
   }
 
   async getOne(id: number) {
-    const user = await this.users.findOne({ where: {id,}, });
+    const user = await this.users.findOne({ where: {id,} });
     
     return user;
   }
@@ -54,7 +54,8 @@ export class UserService {
     const filteredValue = {
       nome: user.nome,
       email: user.email,
-      senha: hashPassword
+      senha: hashPassword,
+      avatar: user.avatar,
     }
 
     return await this.users.save(filteredValue);
@@ -95,7 +96,7 @@ export class UserService {
     
     if(users && bcrypt.compareSync(filters.senha, users.senha)) {
       return users
-    }
+    } 
     
     return null;
   }

@@ -6,6 +6,8 @@ export class UserUpdateInput {
   nome: string;
   @Field()
   email: string;
+  // @Field()
+  // senha: string;
   @Field()
-  senha: string;
+  avatar: string
 }

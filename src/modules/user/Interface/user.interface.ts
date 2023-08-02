@@ -10,4 +10,6 @@ export class IUser {
   email: string;
   @Field()
   senha: string;
+  @Field()
+  avatar: string;
 }

@@ -59,9 +59,16 @@ export class UserResolver {
     filters: UserFilterInput
   ) {
     const user = await this.service.login(filters)
-
+    
     if(user){
-      const newToken = await this.JWTService.signAsync({id: user.id});
+      const newToken = await this.JWTService.signAsync(
+        {
+          id: user.id,
+          nome: user.nome,
+          email: user.email,
+          avatar: user.avatar
+        }
+      );
 
       const tokens = {
         token: newToken
@@ -72,6 +79,32 @@ export class UserResolver {
     
     return null
   };
+
+  @Query(() => Token)
+  async updateLogin(
+    @Args('filters')
+    filters: UserFilterInput
+  ) {
+    const data = filters.id
+    const user = await this.service.getOne(data)
+    
+    if(user){
+      const newToken = await this.JWTService.signAsync(
+        {
+          id: user.id,
+          nome: user.nome,
+          email: user.email,
+          avatar: user.avatar
+        }
+      );
+
+      const tokens = {
+        token: newToken
+      }
+      
+      return tokens;
+    }
+  }
 
   // @Mutation(() => User)
   // async SendEmailValidate(

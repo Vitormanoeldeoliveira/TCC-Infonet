@@ -13,6 +13,8 @@ export class UserEntity implements IUser {
   email: string;
   @Column()
   senha: string;
+  @Column()
+  avatar: string;
 
   @OneToMany(() => PlantationEntity, (plantation) => plantation.usuario)
   plantacao: [];
