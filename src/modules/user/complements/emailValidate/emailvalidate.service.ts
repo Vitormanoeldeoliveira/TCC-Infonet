@@ -63,7 +63,7 @@ export class EmailvalidateService {
     })
   
     const mail = {
-      from: "Criador dessa porra",
+      from: "Criador",
       to: email,
       subject: `eu te enviou uma mensagem`,
       text: `Seu código de verificação é ${RandomNumber}`,
