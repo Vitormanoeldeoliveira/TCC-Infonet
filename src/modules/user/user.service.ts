@@ -65,12 +65,29 @@ export class UserService {
     id: number,
     data: UserUpdateInput
   ) : Promise<UserEntity> {
+    
     const user: any = {
       ...data
     }
+
+    if(data.senha) {
+      const senha = user.senha;
+      
+      const hashPassword = await bcrypt.hashSync(senha, 10)
+  
+      const filteredValue = {
+        nome: user.nome,
+        email: user.email,
+        senha: hashPassword,
+        avatar: user.avatar,
+      };
+
+      data = filteredValue
+    }
+    
     return await this.users
     .createQueryBuilder()
-    .update(user)
+    .update(data.senha ? data : user)
     .where('id = :id', { id })
     .returning('*')
     .updateEntity(true)
@@ -100,46 +117,4 @@ export class UserService {
     
     return null;
   }
-
-  // async validate(
-  //   filters: UserValidateEmailInput
-  // ) {
-  //   const { email } = filters
-
-  //   const uuidPart = parseInt(uuidv4().split('-')[0], 16);
-  //   const min = 1000;
-  //   const max = 9999;
-  //   const RandomNumber = min + (uuidPart % (max - min + 1))
-
-  //   const smtpTransport = nodemailer.createTransport({
-  //     host: 'smtp.gmail.com',
-  //     port: 587,
-  //     secure: false, //SSL/TLS 
-  //     auth: {
-  //       user: 'vitormanoeldeoliveira32@gmail.com',
-  //       pass: 'wmedmwcfblnzspxe'
-  //     }
-  //   })
-  
-  //   const mail = {
-  //     from: "Criador dessa porra",
-  //     to: email,
-  //     subject: `eu te enviou uma mensagem`,
-  //     text: `Seu código de verificação é ${RandomNumber}`,
-  //     //html: "<b>Opcionalmente, pode enviar como HTML</b>"
-  //   }
-
-  //   return smtpTransport.sendMail(mail)
-  //     .then(response => {
-  //         smtpTransport.close();
-  //         return console.log("deu certo");
-          
-  //         // return resolve(response);
-  //     })
-  //     .catch(error => {
-  //         smtpTransport.close();
-  //         return console.log(error, " oi")
-  //         // return reject(error);
-  //     });
-  // }
 }

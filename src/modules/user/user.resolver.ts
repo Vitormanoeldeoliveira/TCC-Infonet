@@ -41,7 +41,7 @@ export class UserResolver {
     id: number,
     @Args('user') 
     data: UserUpdateInput
-  ) : Promise<User> {
+  ) {
     return await this.service.update(id, data)
   }
 
@@ -79,6 +79,14 @@ export class UserResolver {
     
     return null
   };
+
+  @Query(() => User)
+  async changePassword(
+    @Args('filters')
+    filters: UserFilterInput
+  ) {
+    return await this.service.login(filters)
+  }
 
   @Query(() => Token)
   async updateLogin(
