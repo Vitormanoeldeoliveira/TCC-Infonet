@@ -70,6 +70,19 @@ export class UserService {
       ...data
     }
 
+    if (user.email) {
+      const email = user.email
+      const validateUser = await this.users.findOne({
+        where: {
+          email
+        }
+      })
+  
+      if(validateUser) {
+        return null
+      }
+    }
+
     if(data.senha) {
       const senha = user.senha;
       
