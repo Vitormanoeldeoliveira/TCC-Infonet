@@ -15,8 +15,6 @@ export class PlantationEntity implements IPlantation {
   area: number;
   @Column()
   tipo: string;
-  @Column()
-  produto: string;
 
   @Column()
   id_usuario: number;

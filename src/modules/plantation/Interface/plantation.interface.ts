@@ -7,8 +7,6 @@ export class IPlantation {
   @Field()
   descricao: string;
   @Field()
-  produto: string;
-  @Field()
   area: number;
   @Field()
   tipo: string;
