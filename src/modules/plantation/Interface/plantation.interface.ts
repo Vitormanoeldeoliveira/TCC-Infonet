@@ -17,4 +17,7 @@ export class IPlantation {
   id_cidade: number;
   @Field()
   id_planta: number;
+
+  @Field()
+  created_at: Date;
 }

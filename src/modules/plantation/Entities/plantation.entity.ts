@@ -23,6 +23,9 @@ export class PlantationEntity implements IPlantation {
   @Column()
   id_planta: number;
 
+  @Column()
+  created_at: Date;
+
   @ManyToOne(
     () => UserEntity,
     (user) => user.plantacao,
