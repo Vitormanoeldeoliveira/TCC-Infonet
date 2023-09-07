@@ -55,7 +55,7 @@ export class EmailvalidateService {
     const smtpTransport = nodemailer.createTransport({
       host: 'smtp.gmail.com',
       port: 587,
-      secure: false, //SSL/TLS 
+      secure: false, //SSL/TLS
       auth: {
         user: 'vitormanoeldeoliveira32@gmail.com',
         pass: 'wmedmwcfblnzspxe'
