@@ -7,4 +7,7 @@ export class HarvestFilterInput {
 
     @Field({ nullable: true })
     descricao?: string;
+
+    @Field({ nullable: true })
+    excluido?: boolean;
 }

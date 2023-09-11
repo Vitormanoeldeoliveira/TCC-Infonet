@@ -6,11 +6,14 @@ export class IHarvest {
   id: number;
   @Field()
   descricao: string;
-  @Field()
-  tipo: string;
+  // @Field()
+  // tipo: string;
   @Field()
   data_safra: Date;
 
   @Field(() => Int)
-  id_plantacao: number;
+  id_plantacao: number; 
+
+  @Field({ nullable: true })
+  excluido: boolean;
 }

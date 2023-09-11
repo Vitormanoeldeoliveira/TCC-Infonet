@@ -23,8 +23,9 @@ export class PlantationService {
       },
       where: {
         ...filters.id_usuario && { id_usuario: filters.id_usuario },
-        ...filters.descricao && { descricao:  ILike(`%${filters.descricao}%`) }
-      }
+        ...filters.descricao && { descricao:  ILike(`%${filters.descricao}%`) },
+        excluido: filters.excluido
+      },
     });
     
     return plantations;
@@ -54,18 +55,28 @@ export class PlantationService {
       ...data
     }
     return await this.plantation
-    .createQueryBuilder()
-    .update(plantation)
-    .where('id = :id', { id })
-    .returning('*')
-    .updateEntity(true)
-    .execute()
-    .then((res) => res.raw[0])
+      .createQueryBuilder()
+      .update(plantation)
+      .where('id = :id', { id })
+      .returning('*')
+      .updateEntity(true)
+      .execute()
+      .then((res) => res.raw[0])
   }
 
   async delete (
     id: number,
   ) {
-    return await this.plantation.delete(id);
+    const data: any = {
+      excluido: true
+    }
+    return await this.plantation
+      .createQueryBuilder()
+      .update(data)
+      .where('id = :id', { id })
+      .returning('*')
+      .updateEntity(true)
+      .execute()
+      .then((res) => res.raw[0])
   }
 }

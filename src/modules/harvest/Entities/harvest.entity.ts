@@ -13,13 +13,16 @@ export class HarvestEntity implements IHarvest {
   id: number;
   @Column()
   descricao: string;
-  @Column()
-  tipo: string;
+  // @Column()
+  // tipo: string;
   @Column()
   data_safra: Date;
 
   @Column()
   id_plantacao: number;
+
+  @Column()
+  excluido: boolean;
   
   @ManyToOne(
     () => PlantationEntity,

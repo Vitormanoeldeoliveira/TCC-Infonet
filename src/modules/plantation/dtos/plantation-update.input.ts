@@ -15,4 +15,7 @@ export class PlantationUpdateInput {
   id_cidade: number;
   @Field()
   id_planta: number;
+
+  @Field({ defaultValue: false })
+  excluido: boolean;
 }

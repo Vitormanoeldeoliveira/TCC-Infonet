@@ -20,4 +20,7 @@ export class IPlantation {
 
   @Field()
   created_at: Date;
+
+  @Field({ defaultValue: false })
+  excluido: boolean;
 }

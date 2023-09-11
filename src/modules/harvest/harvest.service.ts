@@ -17,11 +17,15 @@ export class HarvestService {
   ) : Promise<HarvestEntity[]> {
     const harvests = await this.harvest.find({
       relations:{ 
-        plantacao: true 
+        plantacao: {
+          cidade: true,
+          planta: true
+        } 
       },
       where: {
         ...filters.id_plantacao && { id_plantacao: filters.id_plantacao },
-        ...filters.descricao && { descricao:  ILike(`%${filters.descricao}%`) }
+        ...filters.descricao && { descricao:  ILike(`%${filters.descricao}%`) },
+        excluido: filters.excluido
       } 
     });
 
@@ -33,7 +37,14 @@ export class HarvestService {
     // filters: HarvestFilterInput
   ) : Promise<HarvestEntity> {
     const harvest = await this.harvest.findOne({ 
-      relations:{ plantacao:true }, 
+      relations:{ 
+        plantacao: {
+          cidade: {
+            estado: true
+          },
+          planta: true
+        } 
+      }, 
       where: {
         id,
         // ...filters.id_plantacao && { id_plantacao: filters.id_plantacao }
@@ -67,6 +78,17 @@ export class HarvestService {
   }
 
   async delete(id: number) {
-    this.harvest.delete(id);
+    const data: any = {
+      excluido: true
+    }
+
+    return await this.harvest
+      .createQueryBuilder()
+      .update(data)
+      .where('id = :id', { id })
+      .returning('*')
+      .updateEntity(true)
+      .execute()
+      .then((res) => res.raw[0])
   }
 }
