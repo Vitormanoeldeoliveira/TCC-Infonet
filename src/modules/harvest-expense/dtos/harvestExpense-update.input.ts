@@ -3,8 +3,6 @@ import { InputType, Field, Int } from '@nestjs/graphql';
 @InputType()
 export class HarvestExpenseUpdateInput {
   @Field()
-  id: number;
-  @Field()
   preco_adubo: number;
   @Field()
   preco_insumos: number;
@@ -12,6 +10,10 @@ export class HarvestExpenseUpdateInput {
   preco_calcario: number;
   @Field()
   valor_inicial: number;
+  @Field()
+  hora_trabalho: number;
+  @Field()
+  hora_trabalhada: number
   
   @Field(() => Int)
   id_safra: number;

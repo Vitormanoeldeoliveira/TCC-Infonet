@@ -20,7 +20,7 @@ export class HarvestService {
         plantacao: {
           cidade: true,
           planta: true
-        } 
+        },
       },
       where: {
         ...filters.id_plantacao && { id_plantacao: filters.id_plantacao },
