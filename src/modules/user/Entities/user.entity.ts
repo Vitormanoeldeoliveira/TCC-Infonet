@@ -1,7 +1,8 @@
-import { BeforeInsert, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { BeforeInsert, Column, Entity, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { IUser } from "../Interface/user.interface";
 import { PlantationEntity } from "src/modules/plantation/Entities/plantation.entity";
 import { PlantEntity } from "src/modules/plant/Entities/plant.entity";
+import { StateEntity } from "src/modules/State/Entities/State.entity";
 
 @Entity('usuario')
 export class UserEntity implements IUser {
@@ -21,4 +22,7 @@ export class UserEntity implements IUser {
 
   @OneToMany(() => PlantEntity, (plant) => plant.usuario)
   planta: [];
+
+  @ManyToMany(() => StateEntity, (state) => state.usuario)
+  estado: StateEntity
 }
