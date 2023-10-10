@@ -8,8 +8,8 @@ import { Plant } from 'src/modules/plant/dtos/plant.model';
 export class Plantation extends IPlantation {
   @Field({ nullable: true })
   usuario: User;
-  @Field({ nullable: true })
-  cidade: City;
+  // @Field({ nullable: true })
+  // cidade: City;
   @Field({ nullable: true })
   planta: Plant;
 }

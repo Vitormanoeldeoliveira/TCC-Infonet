@@ -8,6 +8,12 @@ export class PlantationUpdateInput {
   area: number;
   @Field()
   tipo: string;
+  @Field({ nullable: true })
+  cep: number;
+  @Field(({ nullable: true }))
+  cidade: string;
+  @Field({ nullable: true })
+  uf: string
 
   @Field()
   id_usuario: number;
