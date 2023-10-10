@@ -85,6 +85,6 @@
     "testEnvironment": "node"
   },
   "engines": {
-    "node": "19.6.0"
+    "node": "18.x"
   }
 }
