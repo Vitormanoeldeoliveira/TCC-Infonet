@@ -15,11 +15,17 @@ export class PlantationEntity implements IPlantation {
   area: number;
   @Column()
   tipo: string;
+  @Column()
+  cep: string;
+  @Column()
+  cidade: string;
+  @Column()
+  uf: string;
 
   @Column()
   id_usuario: number;
-  @Column()
-  id_cidade: number;
+  // @Column()
+  // id_cidade: number;
   @Column()
   id_planta: number;
 
@@ -38,16 +44,6 @@ export class PlantationEntity implements IPlantation {
     referencedColumnName: 'id',
   })
   usuario: UserEntity;
-
-  @ManyToOne(
-    () => CityEntity,
-    (city) => city.plantacao,
-  )
-  @JoinColumn({
-    name: 'id_cidade',
-    referencedColumnName: 'id',
-  })
-  cidade: CityEntity;
 
   @ManyToOne(
     () => PlantEntity,

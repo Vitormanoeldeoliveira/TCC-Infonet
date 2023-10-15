@@ -18,7 +18,7 @@ export class HarvestService {
     const harvests = await this.harvest.find({
       relations:{ 
         plantacao: {
-          cidade: true,
+          // cidade: true,
           planta: true
         },
       },
@@ -39,9 +39,9 @@ export class HarvestService {
     const harvest = await this.harvest.findOne({ 
       relations:{ 
         plantacao: {
-          cidade: {
-            estado: true
-          },
+          // cidade: {
+          //   estado: true
+          // },
           planta: true
         } 
       }, 

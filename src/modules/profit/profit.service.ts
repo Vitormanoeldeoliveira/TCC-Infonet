@@ -17,7 +17,9 @@ export class ProfitService {
   ) : Promise<ProfitEntity[]> {
     const profit = await this.profit.find({ 
       relations: {
-        lucroSafra: true,
+        lucroSafra: {
+          plantacao: true
+        },
         lucroGasto: true,
       },
       where: {
