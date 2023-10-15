@@ -23,12 +23,7 @@ export class PlantationService {
   )  {
     const plantations = await this.plantation.find({ 
       relations:{ 
-<<<<<<< HEAD
         usuario: true,
-=======
-        usuario: true, 
-        // cidade: {estado: true},
->>>>>>> e40943e0b93f722816c78ba922411165776ae528
         planta: true 
       },
       where: {
@@ -44,14 +39,8 @@ export class PlantationService {
   async getOne(id: number) {
     const plantation = await this.plantation.findOne({ 
       where: {id,},
-<<<<<<< HEAD
       relations:{ 
         usuario: true,
-=======
-      relations:
-      { usuario: true, 
-        // cidade: {estado: true}, 
->>>>>>> e40943e0b93f722816c78ba922411165776ae528
         planta: true 
       },
     });
