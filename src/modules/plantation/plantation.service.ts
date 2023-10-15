@@ -40,7 +40,11 @@ export class PlantationService {
   async getOne(id: number) {
     const plantation = await this.plantation.findOne({ 
       where: {id,},
-      // relations:{ usuario: true, cidade: {estado: true}, planta: true },
+      relations:
+      { usuario: true, 
+        // cidade: {estado: true}, 
+        planta: true 
+      },
     });
     
     return plantation;
