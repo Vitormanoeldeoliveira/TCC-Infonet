@@ -4,12 +4,18 @@ import { ILike, Repository } from 'typeorm';
 import { PlantationCreateInput } from './dtos/plantation-create.input';
 import { PlantationUpdateInput } from './dtos/plantation-update.input';
 import { PlantationFilterInput } from './dtos/plantation-filter.input';
+import { HarvestService } from '../harvest/harvest.service';
+import { HarvestEntity } from '../harvest/Entities/harvest.entity';
 
 @Injectable()
 export class PlantationService {
   constructor(
     @Inject('PLANTATION_REPOSITORY')
-    private plantation: Repository<PlantationEntity>
+    private plantation: Repository<PlantationEntity>,
+    @Inject('HARVEST_REPOSITORY')
+    private harvest: Repository<HarvestEntity>,
+
+    private harvestService: HarvestService,
   ) {}
 
   async getAll(
@@ -17,7 +23,12 @@ export class PlantationService {
   )  {
     const plantations = await this.plantation.find({ 
       relations:{ 
+<<<<<<< HEAD
         usuario: true,
+=======
+        usuario: true, 
+        // cidade: {estado: true},
+>>>>>>> e40943e0b93f722816c78ba922411165776ae528
         planta: true 
       },
       where: {
@@ -33,8 +44,14 @@ export class PlantationService {
   async getOne(id: number) {
     const plantation = await this.plantation.findOne({ 
       where: {id,},
+<<<<<<< HEAD
       relations:{ 
         usuario: true,
+=======
+      relations:
+      { usuario: true, 
+        // cidade: {estado: true}, 
+>>>>>>> e40943e0b93f722816c78ba922411165776ae528
         planta: true 
       },
     });
@@ -72,7 +89,7 @@ export class PlantationService {
     const data: any = {
       excluido: true
     }
-    return await this.plantation
+    const deleted = await this.plantation
       .createQueryBuilder()
       .update(data)
       .where('id = :id', { id })
@@ -80,5 +97,17 @@ export class PlantationService {
       .updateEntity(true)
       .execute()
       .then((res) => res.raw[0])
+
+    const harvest = await this.harvest.find({
+      where: {
+        id_plantacao: deleted.id
+      }
+    });
+
+    harvest.map(async(safra) => {
+      await this.harvestService.delete(safra.id)
+    })
+
+    return deleted;
   }
 }

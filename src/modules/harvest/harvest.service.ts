@@ -4,12 +4,16 @@ import { ILike, Repository } from 'typeorm';
 import { HarvestCreateInput } from './dtos/harvest-create.input';
 import { HarvestUpdateInput } from './dtos/harvest-update.input';
 import { HarvestFilterInput } from './dtos/harvest-filter.input';
+import { ProfitEntity } from '../profit/Entities/profit.entity';
 
 @Injectable()
 export class HarvestService {
   constructor(
     @Inject('HARVEST_REPOSITORY')
-    private readonly harvest: Repository<HarvestEntity>
+    private readonly harvest: Repository<HarvestEntity>,
+
+    @Inject('PROFIT_REPOSITORY')
+    private profit: Repository<ProfitEntity>
   ) {}
 
   async getAll(
@@ -82,7 +86,7 @@ export class HarvestService {
       excluido: true
     }
 
-    return await this.harvest
+    const response =  await this.harvest
       .createQueryBuilder()
       .update(data)
       .where('id = :id', { id })
@@ -90,5 +94,25 @@ export class HarvestService {
       .updateEntity(true)
       .execute()
       .then((res) => res.raw[0])
+
+    const custo = await this.profit.findOne({
+      where: {
+        id_safra: response.id
+      }
+    })
+
+    if(custo) {
+      await this.profit
+        .createQueryBuilder()
+        .update(data)
+        .where('id = :id', { id: custo.id })
+        .returning('*')
+        .updateEntity(true)
+        .execute()
+        .then((res) => res.raw[0])
+    }
+    
+
+    return response;
   }
 }
