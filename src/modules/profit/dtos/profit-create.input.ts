@@ -13,4 +13,9 @@ export class ProfitCreateInput {
   id_safra: number;
   @Field()
   id_gasto: number;
+  @Field()
+  id_usuario: number;
+
+  @Field({ defaultValue: false })
+  excluido: boolean;
 }

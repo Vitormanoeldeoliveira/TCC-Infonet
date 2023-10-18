@@ -12,6 +12,10 @@ export class IHarvestExpense {
   preco_calcario: number;
   @Field()
   valor_inicial: number;
+  @Field()
+  hora_trabalho: number;
+  @Field()
+  hora_trabalhada: number
   
   @Field()
   id_safra: number;

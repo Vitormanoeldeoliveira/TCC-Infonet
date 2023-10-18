@@ -7,4 +7,7 @@ export class PlantationFilterInput {
 
     @Field({ nullable: true })
     descricao?: string;
+
+    @Field({ nullable: true })
+    excluido?: boolean;
 }

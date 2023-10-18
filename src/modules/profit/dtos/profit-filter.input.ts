@@ -4,4 +4,9 @@ import { Field, Int, InputType } from "@nestjs/graphql";
 export class ProfitFilterInput {
     @Field(() => Int, { nullable: true })
     id_safra?: number;
+    @Field(() => Int, { nullable: true })
+    id_usuario?: number;
+
+    @Field({ nullable: true })
+    excluido?: boolean;
 }

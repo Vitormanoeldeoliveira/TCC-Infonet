@@ -5,16 +5,21 @@ export class PlantationCreateInput {
   @Field()
   descricao: string;
   @Field()
-  produto: string;
-  @Field()
   area: number;
   @Field()
   tipo: string;
+  @Field()
+  cep: string;
+  @Field()
+  cidade: string;
+  @Field()
+  uf: string;
 
   @Field()
   id_usuario: number;
   @Field()
-  id_cidade: number;
-  @Field()
   id_planta: number;
+
+  @Field({ defaultValue: false })
+  excluido: boolean;
 }

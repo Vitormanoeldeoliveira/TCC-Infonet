@@ -1,7 +1,8 @@
-import { Column, Entity, JoinColumn, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { HarvestEntity } from "src/modules/harvest/Entities/harvest.entity";
 import { IProfit } from "../interface/profit.interface";
 import { HarvestExpenseEntity } from "src/modules/harvest-expense/Entities/harvestExpense.entity";
+import { UserEntity } from "src/modules/user/Entities/user.entity";
 
 @Entity('lucro')
 export class ProfitEntity implements IProfit {
@@ -18,6 +19,11 @@ export class ProfitEntity implements IProfit {
   id_safra: number;
   @Column()
   id_gasto: number;
+  @Column()
+  id_usuario: number;
+  
+  @Column()
+  excluido: boolean;
   
   @OneToOne(
     () => HarvestEntity,
@@ -38,4 +44,14 @@ export class ProfitEntity implements IProfit {
     referencedColumnName: 'id',
   })
   lucroGasto: HarvestExpenseEntity;
+
+  @ManyToOne(
+    () => UserEntity,
+    (user) => user.lucro,
+  )
+  @JoinColumn({
+    name: 'id_usuario',
+    referencedColumnName: 'id',
+  })
+  usuario: UserEntity;
 }

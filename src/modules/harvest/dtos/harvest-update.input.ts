@@ -4,11 +4,14 @@ import { InputType, Field, Int } from '@nestjs/graphql';
 export class HarvestUpdateInput {
   @Field()
   descricao: string;
-  @Field()
-  tipo: string;
+  // @Field()
+  // tipo: string;
   @Field()
   data_safra: Date;
 
   @Field(() => Int)
   id_plantacao: number;
+
+  @Field({ defaultValue: false })
+  excluido: boolean;
 }

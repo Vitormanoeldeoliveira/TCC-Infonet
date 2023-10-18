@@ -15,6 +15,10 @@ export class HarvestExpenseEntity implements IHarvestExpense {
   preco_calcario: number;
   @Column()
   valor_inicial: number;
+  @Column()
+  hora_trabalho: number;
+  @Column()
+  hora_trabalhada: number
   
   @Column()
   id_safra: number;

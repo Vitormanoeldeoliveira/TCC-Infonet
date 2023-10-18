@@ -13,4 +13,9 @@ export class ProfitUpdateInput {
   id_safra: number;
   @Field()
   id_gasto: number;
+  @Field(() => Int, { nullable: true })
+  id_usuario: number;
+
+  @Field({ defaultValue: false })
+  excluido: boolean;
 }

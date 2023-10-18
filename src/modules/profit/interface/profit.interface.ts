@@ -15,4 +15,10 @@ export class IProfit {
   id_gasto: number;
   @Field()
   id_safra: number;
+  @Field()
+  id_usuario: number
+
+  
+  @Field({ defaultValue: false })
+  excluido: boolean;
 }

@@ -17,11 +17,15 @@ export class ProfitService {
   ) : Promise<ProfitEntity[]> {
     const profit = await this.profit.find({ 
       relations: {
-        lucroSafra: true,
+        lucroSafra: {
+          plantacao: true
+        },
         lucroGasto: true,
       },
       where: {
-        ...filters.id_safra && { id_safra: filters.id_safra }
+        ...filters.id_safra && { id_safra: filters.id_safra },
+        ...filters.id_usuario && { id_usuario: filters.id_usuario },
+        excluido: filters.excluido
       }
     });
 
@@ -33,6 +37,7 @@ export class ProfitService {
       relations: {
         lucroSafra: true,
         lucroGasto: true,
+        usuario: true,
       }, 
       where: {id} })
     return profit;

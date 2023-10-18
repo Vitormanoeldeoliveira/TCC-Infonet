@@ -10,6 +10,10 @@ export class HarvestExpenseCreateInput {
   preco_calcario: number;
   @Field()
   valor_inicial: number;
+  @Field()
+  hora_trabalho: number;
+  @Field()
+  hora_trabalhada: number
   
   @Field(() => Int)
   id_safra: number;
