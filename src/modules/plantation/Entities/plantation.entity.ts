@@ -16,11 +16,11 @@ export class PlantationEntity implements IPlantation {
   @Column()
   tipo: string;
   @Column()
-  cep: number;
+  cep: string;
   @Column()
   cidade: string;
   @Column()
-  uf: string
+  uf: string;
 
   @Column()
   id_usuario: number;
