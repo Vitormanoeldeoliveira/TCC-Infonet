@@ -10,7 +10,7 @@ export class ProfitEntity implements IProfit {
   id: number;
   @Column()
   qtd_venda: number;
-  @Column()
+  @Column('float')
   valor_venda: number;
   @Column()
   periodo_venda: Date;

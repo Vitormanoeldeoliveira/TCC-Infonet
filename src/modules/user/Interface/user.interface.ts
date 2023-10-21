@@ -12,4 +12,6 @@ export class IUser {
   senha: string;
   @Field()
   avatar: string;
+  @Field({ defaultValue: false })
+  excluido: boolean
 }

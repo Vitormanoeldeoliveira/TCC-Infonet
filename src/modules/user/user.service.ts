@@ -93,6 +93,7 @@ export class UserService {
         email: user.email,
         senha: hashPassword,
         avatar: user.avatar,
+        excluido: false
       };
 
       data = filteredValue
@@ -111,7 +112,18 @@ export class UserService {
   async delete (
     id: number,
   ) {
-    return await this.users.delete(id);
+    const data: any = {
+      excluido: true
+    }
+
+    return await this.users
+    .createQueryBuilder()
+    .update(data)
+    .where('id = :id', { id })
+    .returning('*')
+    .updateEntity(true)
+    .execute()
+    .then((res) => res.raw[0])
   }
 
   async login(
@@ -121,6 +133,7 @@ export class UserService {
     const users = await this.users.findOne({
       where: {
         ...(filters.email && { email: filters.email }),
+        excluido: false
       }
     });
     

@@ -17,6 +17,8 @@ export class UserEntity implements IUser {
   senha: string;
   @Column()
   avatar: string;
+  @Column()
+  excluido: boolean;
 
   @OneToMany(() => PlantationEntity, (plantation) => plantation.usuario)
   plantacao: [];

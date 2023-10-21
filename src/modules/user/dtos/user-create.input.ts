@@ -10,4 +10,6 @@ export class UserCreateInput {
   senha: string;
   @Field()
   avatar: string;
+  @Field({ nullable: true, defaultValue: false })
+  excluido: boolean;
 }

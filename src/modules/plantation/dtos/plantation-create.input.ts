@@ -18,8 +18,6 @@ export class PlantationCreateInput {
   @Field()
   id_usuario: number;
   @Field()
-  id_cidade: number;
-  @Field()
   id_planta: number;
 
   @Field({ defaultValue: false })

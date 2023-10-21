@@ -9,7 +9,7 @@ export class PlantEntity implements IPlant {
   id: number;
   @Column()
   descricao: string;
-  @Column()
+  @Column('float')
   area: number;
   @Column()
   nome: string;
@@ -19,7 +19,7 @@ export class PlantEntity implements IPlant {
   qtd_calcario: number;
   @Column()
   qtd_adubo: number;
-  @Column()
+  @Column('float')
   qtd_insumos: number;
 
   @Column()

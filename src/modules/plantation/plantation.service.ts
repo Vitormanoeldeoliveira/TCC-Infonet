@@ -80,6 +80,7 @@ export class PlantationService {
     const data: any = {
       excluido: true
     }
+    
     const deleted = await this.plantation
       .createQueryBuilder()
       .update(data)

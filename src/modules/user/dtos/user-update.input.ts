@@ -9,5 +9,7 @@ export class UserUpdateInput {
   @Field({ nullable: true })
   senha: string;
   @Field({ nullable: true })
-  avatar: string
+  avatar: string;
+  @Field({ nullable: true, defaultValue: false })
+  excluido: boolean;
 }

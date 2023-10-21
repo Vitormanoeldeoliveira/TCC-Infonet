@@ -7,17 +7,17 @@ import { ProfitEntity } from "src/modules/profit/Entities/profit.entity";
 export class HarvestExpenseEntity implements IHarvestExpense {
   @PrimaryGeneratedColumn()
   id: number;
-  @Column()
+  @Column('float')
   preco_adubo: number;
-  @Column()
+  @Column('float')
   preco_insumos: number;
-  @Column()
+  @Column('float')
   preco_calcario: number;
-  @Column()
+  @Column('float')
   valor_inicial: number;
-  @Column()
+  @Column('float')
   hora_trabalho: number;
-  @Column()
+  @Column('float')
   hora_trabalhada: number
   
   @Column()
