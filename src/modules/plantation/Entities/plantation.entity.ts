@@ -11,7 +11,7 @@ export class PlantationEntity implements IPlantation {
   id: number;
   @Column()
   descricao: string;
-  @Column()
+  @Column('float')
   area: number;
   @Column()
   tipo: string;
