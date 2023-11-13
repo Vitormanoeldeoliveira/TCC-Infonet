@@ -56,6 +56,7 @@ export class UserService {
       email: user.email,
       senha: hashPassword,
       avatar: user.avatar,
+      excluido: false
     }
 
     return await this.users.save(filteredValue);

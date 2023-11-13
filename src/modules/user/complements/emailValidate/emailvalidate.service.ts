@@ -67,7 +67,12 @@ export class EmailvalidateService {
       to: email,
       subject: `eu te enviou uma mensagem`,
       text: `Seu código de verificação é ${RandomNumber}`,
-      //html: "<b>Opcionalmente, pode enviar como HTML</b>"
+      html: `
+        <p style="font-size: 16px; font-family: Arial, sans-serif; color: #333;">Olá,</p>
+        <p style="font-size: 14px; font-family: Arial, sans-serif; color: #555;">
+            Seu código de verificação é <strong>${RandomNumber}</strong>.
+        </p>
+      `,
     }
 
     smtpTransport.sendMail(mail)
