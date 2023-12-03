@@ -36,6 +36,10 @@ export class PlantationService {
     return plantations;
   }
 
+  async getAllSuport() {
+    return await this.plantation.find()
+  }
+
   async getOne(id: number) {
     const plantation = await this.plantation.findOne({ 
       where: {id,},

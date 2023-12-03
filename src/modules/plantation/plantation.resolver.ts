@@ -17,6 +17,11 @@ export class PlantationResolver {
     return await this.service.getAll(filters)
   }
 
+  @Query(() => [Plantation])
+  async getAllPlantationsSuport() : Promise<Plantation[]> {
+    return await this.service.getAllSuport()
+  }
+
   @Query(() => Plantation) 
   async getOnePlantation(
     @Args('id') id:number

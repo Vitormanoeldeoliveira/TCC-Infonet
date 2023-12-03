@@ -17,6 +17,11 @@ export class PlantResolver {
     return await this.service.getAll(filters)
   }
 
+  @Query(() => [Plant])
+  async getAllPlantSuport() : Promise<Plant[]> {
+    return await this.service.getAllSuport()
+  }
+
   @Query(() => Plant)
   async getOnePlant(
     @Args('id') id: number

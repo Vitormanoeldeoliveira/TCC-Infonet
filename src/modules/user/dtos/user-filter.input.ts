@@ -8,4 +8,8 @@ export class UserFilterInput {
     email?: string;
     @Field({ nullable: true })
     senha?: string;
+    @Field({ nullable: true })
+    nome?: string;
+    @Field({ nullable: true })
+    excluido?: boolean
 }

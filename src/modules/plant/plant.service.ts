@@ -28,6 +28,10 @@ export class PlantService {
     return plant;
   };
 
+  async getAllSuport() {
+    return await this.plant.find()
+  }
+
   async getOne(id: number) : Promise<PlantEntity> {
     const plant = await this.plant.findOne({ where: {id} })
 

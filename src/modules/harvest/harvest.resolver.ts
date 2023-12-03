@@ -17,6 +17,11 @@ export class HarvestResolver {
     return await this.service.getAll(filters)
   };
 
+  @Query(() => [Harvest])
+  async getAllHarvestsSuport() : Promise<Harvest[]> {
+    return await this.service.getAllSuport()
+  };
+
   @Query(() => Harvest)
   async getOneHarvest(
     @Args('id') id: number,

@@ -19,8 +19,14 @@ export class UserService {
     private users: Repository<UserEntity>,
   ) {}
 
-  async getAll() : Promise<UserEntity[]> {
-    const users = await this.users.find();
+  async getAll(filters: UserFilterInput) : Promise<UserEntity[]> {
+    const users = await this.users.find({
+      where: {
+        ...filters.id && { id: filters.id },
+        ...filters.email && { email:  ILike(`%${filters.email}%`) },
+        excluido: filters.excluido
+      },
+    });
     return users
   }
 

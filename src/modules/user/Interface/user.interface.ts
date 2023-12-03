@@ -13,5 +13,7 @@ export class IUser {
   @Field()
   avatar: string;
   @Field({ defaultValue: false })
-  excluido: boolean
+  excluido: boolean;
+  @Field()
+  created_at: Date;
 }

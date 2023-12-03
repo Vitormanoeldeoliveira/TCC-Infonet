@@ -36,6 +36,10 @@ export class HarvestService {
     return harvests;
   }
 
+  async getAllSuport() {
+    return await this.harvest.find()
+  }
+
   async getOne(
     id: number,
     // filters: HarvestFilterInput

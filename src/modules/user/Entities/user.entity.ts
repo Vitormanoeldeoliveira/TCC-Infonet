@@ -19,6 +19,8 @@ export class UserEntity implements IUser {
   avatar: string;
   @Column()
   excluido: boolean;
+  @Column("timestamptz")
+  created_at: Date;
 
   @OneToMany(() => PlantationEntity, (plantation) => plantation.usuario)
   plantacao: [];

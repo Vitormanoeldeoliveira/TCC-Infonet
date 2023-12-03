@@ -17,10 +17,12 @@ export class UserResolver {
   ) {}
 
   @Query(() => [User])
-  async getAllUsers() : Promise<User[]> {
-    return await this.service.getAll()
+  async getAllUsers(
+    @Args('filters') filters: UserFilterInput
+  ) : Promise<User[]> {
+    return await this.service.getAll(filters)
   }
-
+  
   @Query(() => User) 
   async getOneUser(
     @Args('id') id:number
