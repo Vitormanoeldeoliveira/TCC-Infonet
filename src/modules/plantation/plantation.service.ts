@@ -31,6 +31,9 @@ export class PlantationService {
         ...filters.descricao && { descricao:  ILike(`%${filters.descricao}%`) },
         excluido: filters.excluido
       },
+      order: {
+        created_at: 'DESC'
+      }
     });
     
     return plantations;

@@ -30,7 +30,10 @@ export class HarvestService {
         ...filters.id_plantacao && { id_plantacao: filters.id_plantacao },
         ...filters.descricao && { descricao:  ILike(`%${filters.descricao}%`) },
         excluido: filters.excluido
-      } 
+      },
+      order: {
+        data_safra: "DESC"
+      }
     });
 
     return harvests;
